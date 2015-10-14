@@ -1,9 +1,15 @@
 // Пример на погрешность вычислений в вещественных числах
+// Все вещественные типы: float / double / long double
+//  представлены в памяти комьютера с погрешностью
 #include <iostream>
 #include <math.h>
 #include <cfloat>
 
 using namespace std;
+
+// Точность сравнения - 0.000000001
+const double EPS = 1e-9;
+//  // DBL_EPSILON * 1000
 
 int main() {
   float f = 0.023; // 4 байта
@@ -14,10 +20,11 @@ int main() {
   double b = 0.9;
   double c = 1;
 
-  // fabs - взять по модулю
+  // Неправильный способ:
   //if(a + b == c) {
-  //  // DBL_EPSILON * 1000
-  if( fabs((a + b) - c) < 1e-9)
+  // Правильный способ:
+  // fabs - взять по модулю
+  if( fabs((a + b) - c) < EPS)
     cout << a << " + " << b << " == " << c << endl;
   else {
     cout << a << " + " << b << " != " << c << endl;
