@@ -2,7 +2,19 @@
 
 using namespace std;
 
+const int MAX_N = 1000;
+
+int m = 5;
+
 int main() {
+    int n = 5;
+    {
+        int n = 10;
+        cout << n << endl;
+    }
+    cout << n << endl;
+
+    /*
   // Массивы
   // =======
   // Одномерные
@@ -40,6 +52,6 @@ int main() {
       maxValue = intArray[i];
 
   //<--
-
+*/
   return 0;
 }

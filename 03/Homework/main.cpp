@@ -11,7 +11,7 @@
 
 using namespace std;
 
-/// Элемент 
+/// Элемент
 //-->
 struct ListElement {
   int value;

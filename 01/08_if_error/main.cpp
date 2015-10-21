@@ -8,14 +8,16 @@ using namespace std;
 #define MY_CONST 3
 
 int main() {
-  int a = 0;
+  int a = 3, bb = 2;
+  // Присваивания по цепочке
+  a = 2 + (bb = a + 1);
 
   if(a == 0)  /*=*/
     cout << "a = 0" << endl;
   else
     cout << "a != 0" << endl;
 
-  //return 0;
+  return 0;
 
   if((3 >= 2) && (10 > 7))
     cout << "TRUE" << endl;

@@ -13,7 +13,7 @@ int main() {
   //   что_выполнять;
   while(i < 1000) {
     i++;
-    sum += i;
+    sum += i; // sum = sum + i;
   }
 
   cout << "Sum from 1 to 1000 = " << sum << endl;

@@ -14,6 +14,13 @@ int main() {
     else
       cout << i << " - FALSE" << endl;
 
+  char* str = NULL;
+  if(str){
+    cout << "str - TRUE" << endl;
+  } else {
+    cout << "str - FALSE" << endl;
+  }
+
   int a = 2, b = 3;
 
   // && - логическое И
@@ -27,7 +34,14 @@ int main() {
   a + b;
 
   // Тернарный оператор - альтернатива if
+  //   (условие) ? значение_если_истина
+  //             : значение_если_ложь
   int min = (a < b) ? a : b;
+  // if(a < b){
+  //   min = a;
+  // } else {
+  //   min = b;
+  // }
 
   return 0;
 }

@@ -26,25 +26,25 @@ int main() {
   // {-2, 1, [5, 10, 6, 11 ] }
   bool changes;
 
-   do {
-     changes = false; // нет перестановок в массиве
+  do {
+    changes = false; // нет перестановок в массиве
 
-     for(int i = 0; i < N - 1; ++i) {
-       if(A[i] > A[i + 1]) {
-         // SWAP
-         //int temp = A[i];
-         //A[i] = A[i+1];
-         //A[i+1] = temp;
-         //A[i] ^= A[i+1] ^= A[i] ^= A[i+1];
-         cout << "swap(" << A[i] << ", " << A[i + 1] << ")" << endl;
-         swap(A[i], A[i + 1]);
-         show();
-         changes = true;
-       }
-     }
-     cout << "  changes " << changes << " -> ";
-     show();
-   } while(changes);
+    for(int i = 0; i < N - 1; ++i) {
+      if(A[i] > A[i + 1]) {
+        // SWAP
+        //int temp = A[i];
+        //A[i] = A[i+1];
+        //A[i+1] = temp;
+        //A[i] ^= A[i+1] ^= A[i] ^= A[i+1];
+        cout << "swap(" << A[i] << ", " << A[i + 1] << ")" << endl;
+        swap(A[i], A[i + 1]);
+        show();
+        changes = true;
+      }
+    }
+    cout << "  changes " << changes << " -> ";
+    show();
+  } while(changes);
 
   for(int i = 0; i < N - 1; ++i)
     for(int j = i + 1; j < N; ++j)
