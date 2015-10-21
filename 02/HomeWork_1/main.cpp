@@ -8,6 +8,8 @@ struct Point {
   double x, y;
 };
 
+typedef Point Vector;
+
 double sqr(double x) {
   return x * x;
 }
@@ -17,8 +19,6 @@ double dist(Point a, Point b) {
     sqrt(sqr(a.x - b.x) +
          sqr(a.y - b.y));
 }
-
-typedef Point Vector;
 
 // Сумма
 Point sum(Vector A, Vector B) {
