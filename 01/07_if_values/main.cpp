@@ -15,11 +15,10 @@ int main() {
       cout << i << " - FALSE" << endl;
 
   char* str = NULL;
-  if(str){
+  if(str)
     cout << "str - TRUE" << endl;
-  } else {
+  else
     cout << "str - FALSE" << endl;
-  }
 
   int a = 2, b = 3;
 

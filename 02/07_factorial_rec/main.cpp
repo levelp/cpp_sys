@@ -11,7 +11,7 @@ long long f(int N) { // N - в стеке
   if(N == 0)
     return 1;
   else
-    return N * f(N-1);
+    return N * f(N - 1);
   //return (N == 0) ? 1 : N * f(N - 1);
 }
 

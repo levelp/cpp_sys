@@ -7,14 +7,14 @@ const int MAX_N = 1000;
 int m = 5;
 
 int main() {
-    int n = 5;
-    {
-        int n = 10;
-        cout << n << endl;
-    }
+  int n = 5;
+  {
+    int n = 10;
     cout << n << endl;
+  }
+  cout << n << endl;
 
-    /*
+  /*
   // Массивы
   // =======
   // Одномерные
@@ -35,23 +35,23 @@ int main() {
 
   // Увеличить каждый элемент массива на 10
   for(int i = 0; i < 10; ++i)
-    intArray[i] += 10;
+  intArray[i] += 10;
 
   // Поиск минимума в массиве
   int minValue = intValue[0];
 
   for(int i = 1; i < 10; ++i)
-    if(intArray[i] < minValue)
-      minValue = intArray[i];
+  if(intArray[i] < minValue)
+    minValue = intArray[i];
 
   // Поиск максимума в массиве
   int maxValue = intValue[0];
 
   for(int i = 1; i < 10; ++i)
-    if(intArray[i] > maxValue)
-      maxValue = intArray[i];
+  if(intArray[i] > maxValue)
+    maxValue = intArray[i];
 
   //<--
-*/
+  */
   return 0;
 }

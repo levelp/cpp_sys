@@ -29,3 +29,10 @@
 
 *.layout
 *.depend
+
+cvibuild.*
+*.cdb
+*.cws
+log.txt
+
+__pycache__

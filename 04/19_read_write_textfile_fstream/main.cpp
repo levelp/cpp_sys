@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-  // 
+  //
   ifstream in("in.txt");
   long long a, b;
   in >> a >> b;
