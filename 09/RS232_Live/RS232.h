@@ -15,9 +15,13 @@ extern "C" {
 /* Panels and Controls: */
 
 #define  PANEL                            1       /* callback function: panelCB */
-#define  PANEL_COM_SEND_TO                2       /* control type: ring, callback function: (none) */
-#define  PANEL_STRIPCHART                 3       /* control type: strip, callback function: (none) */
-#define  PANEL_TIMER                      4       /* control type: timer, callback function: cbTimerTick */
+#define  PANEL_COM_PORT                   2       /* control type: ring, callback function: (none) */
+#define  PANEL_SERIAL_NUMBER              3       /* control type: string, callback function: enterSerialNumber */
+#define  PANEL_COMMANDBUTTON              4       /* control type: command, callback function: checkWriteRead */
+#define  PANEL_SN_RESULT                  5       /* control type: string, callback function: (none) */
+#define  PANEL_SN_LED                     6       /* control type: LED, callback function: (none) */
+#define  PANEL_STRIPCHART                 7       /* control type: strip, callback function: (none) */
+#define  PANEL_TIMER                      8       /* control type: timer, callback function: cbTimerTick */
 
 
 /* Control Arrays: */
@@ -33,6 +37,8 @@ extern "C" {
 /* Callback Prototypes: */
 
 int  CVICALLBACK cbTimerTick(int panel, int control, int event, void* callbackData, int eventData1, int eventData2);
+int  CVICALLBACK checkWriteRead(int panel, int control, int event, void* callbackData, int eventData1, int eventData2);
+int  CVICALLBACK enterSerialNumber(int panel, int control, int event, void* callbackData, int eventData1, int eventData2);
 int  CVICALLBACK panelCB(int panel, int event, void* callbackData, int eventData1, int eventData2);
 
 
