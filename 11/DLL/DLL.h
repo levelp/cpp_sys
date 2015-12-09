@@ -27,7 +27,7 @@ extern "C" {
 // Global functions
 
 // Function prototype
-char hex2ascii(char* hex);
+char* hex2ascii(char* hex);
 
 #ifdef __cplusplus
 }
