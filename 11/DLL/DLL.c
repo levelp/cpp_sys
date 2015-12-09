@@ -38,7 +38,7 @@ char* hex2ascii(char* hex) {
   int i = 0; // Index for current symbol in result string
   char* res = malloc((strlen(hex) + 1) / 2 + 1); // Result string
   int code; // Symbol code
-  while(sscanf(data, "%X%n", &code, &offset) == 1) {
+  while(sscanf(data, "%02X%n", &code, &offset) == 1) {
     res[i] = (char) code; // Save current char to result string
     data += offset; // Move on to next hex code
     i++; // Move to next char in result string
