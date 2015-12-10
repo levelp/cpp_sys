@@ -22,6 +22,8 @@ extern "C" {
 #define  PANEL_SN_LED                     6       /* control type: LED, callback function: (none) */
 #define  PANEL_STRIPCHART                 7       /* control type: strip, callback function: (none) */
 #define  PANEL_TIMER                      8       /* control type: timer, callback function: cbTimerTick */
+#define  PANEL_PICTUREBUTTON              9       /* control type: pictButton, callback function: (none) */
+#define  PANEL_BINARYSWITCH               10      /* control type: binary, callback function: binarySwitch */
 
 
 /* Control Arrays: */
@@ -36,6 +38,7 @@ extern "C" {
 
 /* Callback Prototypes: */
 
+int  CVICALLBACK binarySwitch(int panel, int control, int event, void* callbackData, int eventData1, int eventData2);
 int  CVICALLBACK cbTimerTick(int panel, int control, int event, void* callbackData, int eventData1, int eventData2);
 int  CVICALLBACK checkWriteRead(int panel, int control, int event, void* callbackData, int eventData1, int eventData2);
 int  CVICALLBACK enterSerialNumber(int panel, int control, int event, void* callbackData, int eventData1, int eventData2);

@@ -43,9 +43,12 @@ int sleepAfterCommand = 1000;
 // Date/time format for logging
 char* logTimeFormat = "%I:%M:%S"; // %d.%m.%Y %I:%M:%S
 
+char* activePlatform = "Novatek";
 char* activeModel = "24PHT4000_60";
 
 int tryCount = 5;
+
+char* deviceLoadedKeyString = "ShellPauseTV::";
 
 // MODEL
 char* modelName = "24PHT4000/60";
@@ -197,6 +200,8 @@ typedef struct {
   unsigned char* data; // Data ("len" bytes)
 } Answer;
 
+int showInHex = 0;
+
 Answer readAnswer() {
   static char buf[256];
   int readed = ComRd(COM_PORT, buf, sizeof(buf));
@@ -204,8 +209,9 @@ Answer readAnswer() {
   if(readed < 0)
     showError(readed);
   else {
-    T("\n--- Readed: %d bytes --- \"%s\"",
-      readed, ascii2hex(buf, 3));
+    if(showInHex)
+      T("\n--- Readed: %d bytes --- \"%s\"",
+        readed, ascii2hex(buf, 3));
 
     if(readed > 3) {
       // 3 bytes - answer header
@@ -213,9 +219,12 @@ Answer readAnswer() {
       answer.data = malloc(answer.len + 1);
       memcpy(answer.data, buf + 3, answer.len);
       answer.data[answer.len] = 0x00;
-      T(">>>>> \"%s\"\n\"%s\"",
-        answer.data,
-        ascii2hex(answer.data, answer.len));
+      if(showInHex)
+        T(">>>>> \"%s\"\n\"%s\"",
+          answer.data,
+          ascii2hex(answer.data, answer.len));
+      else
+        T(answer.data);
     }
   }
   FlushInQ(COM_PORT);
@@ -384,8 +393,11 @@ void readIni() {
   Ini_String("LOG", "logTimeFormat", &logTimeFormat);
 
   Ini_String("MODEL", "activeModel", &activeModel);
+  Ini_String("MODEL", "activePlatform", &activePlatform);
 
   Ini_Int("TEST", "tryCount", &tryCount);
+
+  Ini_String("STRINGS", "deviceLoadedKeyString", &deviceLoadedKeyString);
 
   Ini_End();
 }
@@ -440,13 +452,35 @@ int main (int argc, char* argv[]) {
   T("--- Open COM%d %s port ---", COM_PORT, comPortName);
   OpenComConfig(COM_PORT, comPortName, baudRate, parity,
                 dataBits, stopBits, iqSize, oqSize);
-  SetComTime(COM_PORT, timeoutSeconds);
 
+  // Read all output from device
+  showInHex = FALSE;
+  SetComTime(COM_PORT, 6.0);
+  Answer ans;
+  do {
+    ans = readAnswer();
+    if(ans.len > 0)
+      if(strstr(ans.data, deviceLoadedKeyString)) {
+        T("\n========================================"
+          "\n        DEVICE LOADED                   "
+          "\n========================================");
+        break;
+      }
+  } while(ans.len > 0);
+  showInHex = TRUE;
+
+  SetComTime(COM_PORT, timeoutSeconds);
   if(!checkIfInFactoryMode())
     enterFactory();
 
+  clock_t t1 = clock();
+
   readModel();
   testReadSoftware();
+
+  clock_t t2 = clock();
+  double timeDiff = (t2 - t1) / ((double)CLOCKS_PER_SEC);
+  T("Test time: %f", timeDiff);
 
   testSerialNumber("UZ1A1234567890");
 
@@ -576,6 +610,20 @@ int CVICALLBACK enterSerialNumber (int panel, int control, int event,
           SHOW_KEY(VAL_F11_VKEY);
           SHOW_KEY(VAL_F12_VKEY);
       }
+      break;
+  }
+  return 0;
+}
+
+int CVICALLBACK binarySwitch (int panel, int control, int event,
+                              void* callbackData, int eventData1, int eventData2) {
+  switch (event) {
+    case EVENT_COMMIT:
+      int value;
+      GetCtrlVal(PANEL, PANEL_BINARYSWITCH, &value);
+      T("Switch %d", value);
+      SetActiveCtrl(PANEL, PANEL_BINARYSWITCH);
+
       break;
   }
   return 0;
